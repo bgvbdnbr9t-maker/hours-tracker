@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#121212"><link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hours Tracker</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<h1>Hours Tracker</h1>
+
+<div class="card">
+  <input type="number" id="hours" placeholder="Hours worked">
+  <input type="number" id="rate" placeholder="Hourly rate">
+  <button onclick="calculatePay()">Add Shift</button>
+</div>
+
+<div class="totals">
+  <p id="today"></p>
+  <p id="weekly"></p>
+  <p id="total"></p>
+</div>
+
+<canvas id="chart"></canvas>
+
+<div class="actions">
+  <button onclick="resetData()">Reset</button>
+  <button onclick="exportCSV()">Export</button>
+  <button onclick="toggleDarkMode()">Dark Mode</button>
+  <button onclick="backupData()">Backup</button>
+  <button onclick="restoreData()">Restore</button>
+</div>
+
+<h2>History</h2>
+<div id="history"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
