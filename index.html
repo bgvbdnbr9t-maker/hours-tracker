@@ -1,14 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FuelLog</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FuelLog</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: #fff;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+input, button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: none;
+}
+
+input {
+  background: #1e293b;
+  color: #fff;
+}
+
+button {
+  background: #22c55e;
+  color: #000;
+  font-weight: bold;
+}
+
+.entry {
+  background: #1e293b;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.stats {
+  margin-top: 20px;
+  padding: 10px;
+  background: #1e293b;
+  border-radius: 8px;
+}
+</style>
 </head>
+
 <body>
+<div class="container">
+  <h1>FuelLog ⛽</h1>
 
-<h1>FuelLog is Live 🚗⛽</h1>
-<p>If you see this, your site is working.</p>
+  <input type="number" id="miles" placeholder="Miles driven">
+  <input type="number" id="gallons" placeholder="Gallons used">
+  <input type="number" id="price" placeholder="Total cost ($)">
+  
+  <button onclick="addEntry()">Add Entry</button>
 
+  <div class="stats" id="stats"></div>
+  <div id="log"></div>
+</div>
+
+<script>
+let entries = JSON.parse(localStorage.getItem('fuelLog')) || [];
+
+function save() {
+  localStorage.setItem('fuelLog', JSON.stringify(entries));
+}
+
+function addEntry() {
+  const miles = parseFloat(document.getElementById('miles').value);
+  const gallons = parseFloat(document.getElementById('gallons').value);
+  const price = parseFloat(document.getElementById('price').value);
+
+  if (!miles || !gallons || !price) return;
+
+  const mpg = miles / gallons;
+
+  const entry = {
+    miles,
+    gallons,
+    price,
+    mpg,
+    date: new Date().toLocaleDateString()
+  };
+
+  entries.push(entry);
+  save();
+  render();
+
+  document.getElementById('miles').value = '';
+  document.getElementById('gallons').value = '';
+  document.getElementById('price').value = '';
+}
+
+function render() {
+  const log = document.getElementById('log');
+  const stats = document.getElementById('stats');
+
+  log.innerHTML = '';
+
+  let totalMiles = 0;
+  let totalGallons = 0;
+  let totalCost = 0;
+
+  entries.forEach((e, i) => {
+    totalMiles += e.miles;
+    totalGallons += e.gallons;
+    totalCost += e.price;
+
+    log.innerHTML += `
+      <div class="entry">
+        <strong>${e.date}</strong><br>
+        ${e.miles} miles / ${e.gallons} gal<br>
+        MPG: ${e.mpg.toFixed(2)}<br>
+        $${e.price}
+      </div>
+    `;
+  });
+
+  const avgMPG = totalMiles / totalGallons || 0;
+
+  stats.innerHTML = `
+    <strong>Total Miles:</strong> ${totalMiles.toFixed(1)}<br>
+    <strong>Total Cost:</strong> $${totalCost.toFixed(2)}<br>
+    <strong>Avg MPG:</strong> ${avgMPG.toFixed(2)}
+  `;
+}
+
+render();
+</script>
 </body>
 </html>
