@@ -1,0 +1,55 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont;
+  margin: 0;
+  padding: 15px;
+  background: #0f172a;
+  color: white;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #334155;
+  color: white;
+}
+
+button {
+  background: #22c55e;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+}
+
+.actions button {
+  background: #334155;
+}
+
+.history-card {
+  background: #1e293b;
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-btn {
+  background: #ef4444;
+}
